@@ -1,10 +1,10 @@
 definition(
-    name: "BigTalker2-Child",
+    name: "BigTalker2-SonosMod-Child",
     namespace: "rayzurbock",
     author: "rayzur@rayzurbock.com",
     description: "Do not install in the mobile app, Save don't publish (needed by BigTalker2)",
     category: "Fun & Social",
-    parent: "rayzurbock:BigTalker2",
+    parent: "rayzurbock:BigTalker2-SonosMod",
     iconUrl: "http://lowrance.cc/ST/icons/BigTalker-2.0.6.png",
     iconX2Url: "http://lowrance.cc/ST/icons/BigTalker@2x-2.0.6.png",
     iconX3Url: "http://lowrance.cc/ST/icons/BigTalker@2x-2.0.6.png")
@@ -133,7 +133,7 @@ def pageConfigMotion(){
             input name: "motionTestInactive1", type: "bool", title: "Toggle to test motion inactive phrase", required: false, defaultValue: false, submitOnChange: true
             input name: "motionPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"], submitOnChange: true
             input name: "motionSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false, submitOnChange: true
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "motionVolume1", type: "number", title: "Set volume to (overrides default):", required: false, submitOnChange: true
             	input name: "motionResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true, submitOnChange: true
                 input name: "motionVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -187,7 +187,7 @@ def pageConfigSwitch(){
             input name: "switchTestOff1", type: "bool", title: "Toggle to test switch OFF phrase", required: false, defaultValue: false, submitOnChange: true
             input name: "switchPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"], submitOnChange: true
             input name: "switchSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false, submitOnChange: true
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "switchVolume1", type: "number", title: "Set volume to (overrides default):", required: false, submitOnChange: true
             	input name: "switchResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true, submitOnChange: true
                 input name: "switchVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -235,7 +235,7 @@ def pageConfigPresence(){
             input name: "presTalkOnLeave1", type: "text", title: "Say this when someone leaves:", required: false, defaultValue: defaultSpeechLeave1
             input name: "presPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "presSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "presVolume1", type: "number", title: "Set volume to (overrides default):", required: false
             	input name: "presResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "presVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -269,7 +269,7 @@ def pageConfigLock(){
             input name: "lockTalkOnLock1", type: "text", title: "Say this when locked:", required: false, defaultValue: defaultSpeechLock1
             input name: "lockPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "lockSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "lockVolume1", type: "number", title: "Set volume to (overrides default):", required: false
             	input name: "lockResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "lockVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -303,7 +303,7 @@ def pageConfigContact(){
             input name: "contactTalkOnClose1", type: "text", title: "Say this when closed:", required: false, defaultValue: defaultSpeechClose1
             input name: "contactPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "contactSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "contactVolume1", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "contactResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "contactVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -340,7 +340,7 @@ def pageConfigMode(){
             input name: "TalkOnModeChange1", type: "text", title: "Say this when home mode is changed", required: false, defaultValue: defaultSpeechMode1
             input name: "modePersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "modePhraseSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "modePhraseVolume1", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "modePhraseResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "modePhraseVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -379,7 +379,7 @@ def pageConfigThermostat(){
             input name: "thermostatTalkOnFan1", type: "text", title: "Say this on change to fan only:", required: false, defaultValue: defaultSpeechFan1
             input name: "thermostatPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "thermostatSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "thermostatVolume1", type: "number", title: "Set volume to (overrides default):", required: false
             	input name: "thermostatResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "thermostatVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -413,7 +413,7 @@ def pageConfigAcceleration(){
             input name: "accelerationTalkOnInactive1", type: "text", title: "Say this when inactivated:", required: false, defaultValue: defaultSpeechInactive1
             input name: "accelerationPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "accelerationSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "accelerationVolume1", type: "number", title: "Set volume to (overrides default):", required: false
             	input name: "accelerationResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "accelerationVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -447,7 +447,7 @@ def pageConfigWater(){
             input name: "waterTalkOnDry1", type: "text", title: "Say this when dry:", required: false, defaultValue: defaultSpeechDry1
             input name: "waterPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "waterSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "waterVolume1", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "waterResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "waterVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -484,7 +484,7 @@ def pageConfigSmoke(){
             input name: "smokeTalkOnTest1", type: "text", title: "Say this when tested:", required: false, defaultValue: defaultSpeechTest1
             input name: "smokePersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "smokeSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "smokeVolume1", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "smokeResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "smokeVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -518,7 +518,7 @@ def pageConfigButton(){
             input name: "buttonTalkOnHold1", type: "text", title: "Say this when held:", required: false, defaultValue: defaultSpeechButtonHold1
             input name: "buttonPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "buttonSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "buttonVolume1", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "buttonResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "buttonVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -551,7 +551,7 @@ def pageConfigSHM(){
             input name: "SHMTalkOnAway", type: "text", title: "Say this when Armed, Away:", required: false, defaultValue: defaultSpeechSHMAway
             input name: "SHMSpeechDeviceAway", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
             input name: "SHMDisableSwitch1", type: "capability.switch", title: "Disable when this switch is off", required: false, multiple: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "SHMVolumeAway", type: "number", title: "Set volume to (overrides default):", required: false
             	input name: "SHMResumePlayAway", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "SHMVoiceAway", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -570,7 +570,7 @@ def pageConfigSHM(){
             }
             input name: "SHMTalkOnHome", type: "text", title: "Say this when Armed, Home:", required: false, defaultValue: defaultSpeechSHMHome
             input name: "SHMSpeechDeviceHome", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "SHMVolumeHome", type: "number", title: "Set volume to (overrides default):", required: false
             	input name: "SHMResumePlayHome", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "SHMVoiceHome", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -589,7 +589,7 @@ def pageConfigSHM(){
             }
             input name: "SHMTalkOnDisarm", type: "text", title: "Say this when Disarmed:", required: false, defaultValue: defaultSpeechSHMDisarm
             input name: "SHMSpeechDeviceDisarm", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "SHMVolumeDisarm", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "SHMResumePlayDisarm", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "SHMVoiceDisarm", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -616,7 +616,7 @@ def pageConfigTime(){
             input name: "timeSlotOnTime1", type: "text", title: "Say on schedule:", required: false
             input name: "timeSlotPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "timeSlotSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "timeSlotVolume1", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "timeSlotResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "timeSlotVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -632,7 +632,7 @@ def pageConfigTime(){
             input name: "timeSlotOnTime2", type: "text", title: "Say on schedule:", required: false
             input name: "timeSlotPersonality2", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "timeSlotSpeechDevice2", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "timeSlotVolume2", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "timeSlotResumePlay2", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "timeSlotVoice2", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -648,7 +648,7 @@ def pageConfigTime(){
             input name: "timeSlotOnTime3", type: "text", title: "Say on schedule:", required: false
             input name: "timeSlotPersonality3", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "timeSlotSpeechDevice3", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "timeSlotVolume3", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "timeSlotResumePlay3", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "timeSlotVoice3", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -684,7 +684,7 @@ def pageConfigPowerMeter(){
             input name: "powerMeterTalkOnFallThold1", type: "number", title: "Low energy usage threshold (watts):", required: powerMeterTalkOnFall1, defaultValue: defaultSpeechpowerMeterFall1
             input name: "powerMeterPersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "powerMeterSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "powerMeterVolume1", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "powerMeterResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "powerMeterVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -720,7 +720,7 @@ def pageConfigRoutine(){
             input name: "routineTalkOnRun1", type: "text", title: "Say this routine runs:", required: false, defaultValue: defaultSpeechRoutine1
             input name: "routinePersonality1", type: "enum", title: "Allow Personality (overrides default)?:", required: false, options: ["Yes", "No"]
             input name: "routineSpeechDevice1", type: parent?.state?.speechDeviceType, title: "Talk with these text-to-speech devices (overrides default)", multiple: true, required: false
-            if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+            if (parent?.state?.speechDeviceType == "capability.audioNotification") {
             	input name: "routineVolume1", type: "number", title: "Set volume to (overrides default):", required: false
                 input name: "routineResumePlay1", type: "bool", title: "Attempt to resume playing audio?", required: false, defaultValue: (parent?.settings?.resumePlay == false) ? false : true
                 input name: "routineVoice1", type: "enum", title: "Voice (overrides default):", options: parent?.state?.supportedVoices, required: false, submitOnChange: true
@@ -1517,7 +1517,7 @@ def processScheduledEvent(index, eventtime, alloweddays){
     LOGDEBUG("(onScheduledEvent): ${timeNow}, ${index}, ${myVoice}", true)
     //Check Restrictions
     if (!(processRestrictions("timeSlot",index))){ return }
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1){if (!settings?.timeSlotResumePlay1 == null) { resume = settings.timeSlotResumePlay1 }}
 		if (index == 2){if (!settings?.timeSlotResumePlay2 == null) { resume = settings.timeSlotResumePlay2 }}
 		if (index == 3){if (!settings?.timeSlotResumePlay3 == null) { resume = settings.timeSlotResumePlay3 }}
@@ -1553,7 +1553,7 @@ def processMotionEvent(index, evt){
     if (!(processRestrictions("motion",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.motionResumePlay1 == null) { resume = settings.motionResumePlay1 }
 		}
@@ -1588,7 +1588,7 @@ def processSwitchEvent(index, evt){
     if (!(processRestrictions("switch",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!(settings?.switchResumePlay1 == null)) { resume = settings.switchResumePlay1 }
 		}
@@ -1623,7 +1623,7 @@ def processPresenceEvent(index, evt){
     if (!(processRestrictions("presence",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.presResumePlay1 == null) { resume = settings.presResumePlay1 }
 		}
@@ -1660,7 +1660,7 @@ def processLockEvent(index, evt){
     if (!(processRestrictions("lock",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.lockResumePlay1 == null) { resume = settings.lockResumePlay1 }
 		}
@@ -1696,7 +1696,7 @@ def processContactEvent(index, evt){
     if (!(processRestrictions("contact",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.contactResumePlay1 == null) { resume = settings.contactResumePlay1 }
 		}
@@ -1729,7 +1729,7 @@ def processModeChangeEvent(index, evt){
     LOGDEBUG("(onModeEvent): Last Mode: ${state.lastMode}, New Mode: ${location.mode}, ${myVoice}", true)
     //Check Restrictions
     if (!(processRestrictions("mode",index))){ return }
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.modePhraseResumePlay1 == null) { resume = settings.modePhraseResumePlay1 }
 		}
@@ -1781,7 +1781,7 @@ def processThermostatEvent(index, evt){
     if (!(processRestrictions("thermostat",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.thermostatResumePlay1 == null) { resume = settings.thermostatResumePlay1 }
 		}
@@ -1826,7 +1826,7 @@ def processAccelerationEvent(index, evt){
     if (!(processRestrictions("acceleration",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.accelerationResumePlay1 == null) { resume = settings.accelerationResumePlay1 }
 		}
@@ -1862,7 +1862,7 @@ def processWaterEvent(index, evt){
     if (!(processRestrictions("water",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.waterResumePlay1 == null) { resume = settings.waterResumePlay1 }
 		}
@@ -1898,7 +1898,7 @@ def processSmokeEvent(index, evt){
     if (!(processRestrictions("smoke",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.smokeResumePlay1 == null) { resume = settings.smokeResumePlay1 }
 		}
@@ -1938,7 +1938,7 @@ def processButtonEvent(index, evt){
     if (!(processRestrictions("button",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.buttonResumePlay1 == null) { resume = settings.buttonResumePlay1 }
 		}
@@ -1971,7 +1971,7 @@ def processSHMEvent(index, evt){
     if (!(processRestrictions("SHM",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.SHMResumePlayAway == null) { resume = settings.SHMResumePlayAway }
             if (settings?.SHMVoiceAway) { myVoice = getMyVoice(settings?.SHMVoiceAway) }
@@ -2037,7 +2037,7 @@ def processPowerMeterEvent(index, evt){
     if (!(processRestrictions("powerMeter",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.powerMeterResumePlay1 == null) { resume = settings.powerMeterResumePlay1 }
 		}
@@ -2115,7 +2115,7 @@ def processRoutineEvent(index, evt){
     if (!(processRestrictions("routine",index))){ return }
     state.TalkPhrase = null
     state.speechDevice = null
-	if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+	if (parent?.state?.speechDeviceType == "capability.audioNotification") {
 		if (index == 1) {
 			if (!settings?.routineResumePlay1 == null) { resume = settings.routineResumePlay1 }
 		}
@@ -2153,7 +2153,7 @@ def getDesiredVolume(invol) {
             }
         }
 	}
-    if (parent?.state?.speechDeviceType == "capability.musicPlayer") { 
+    if (parent?.state?.speechDeviceType == "capability.audioNotification") { 
     	LOGDEBUG("finalVolume: ${finalVolume}", true)
     }
     return finalVolume
@@ -2162,7 +2162,7 @@ def getDesiredVolume(invol) {
 def getMyVoice(deviceVoice){
     def myVoice = "Not Used"
     if (!(deviceVoice == null )) { myVoice = deviceVoice }
-    if (parent?.state?.speechDeviceType == "capability.musicPlayer") {
+    if (parent?.state?.speechDeviceType == "capability.audioNotification") {
     	log.debug "getMyVoice: deviceVoice=${myVoice}"
         log.debug "getMyVoice: settings.parent.speechVoice=${parent?.settings?.speechVoice}"
 		myVoice = (!(deviceVoice == null || deviceVoice == "")) ? deviceVoice : (parent?.settings?.speechVoice ? parent?.settings?.speechVoice : "Salli(en-us)")
@@ -2202,5 +2202,5 @@ def LOGERROR(txt){
 }
 
 def setAppVersion(){
-    state.appversion = "C2.0.6"
+    state.appversion = "C2.0.7"
 }
