@@ -1932,7 +1932,7 @@ def pageConfigureSpeechDeviceType(){
         section (){
             paragraph "${app.label} can support either 'Audio Notification' or 'Speech Synthesis' devices."
             paragraph "'Audio Notification' typically supports devices such as Sonos LAN Websocket.\n\n'Speech Synthesis' typically supports devices such as Ubi and LANnouncer.\n\nIf only using with AskAlexa this setting can be ignored.\n\nThis setting cannot be changed without reinstalling ${app.label}."
-            input "speechDeviceType", "bool", title: "ON=Music Player\nOFF=Speech Synthesis", required: true, defaultValue: true, submitOnChange: true
+            input "speechDeviceType", "bool", title: "ON=Audio Notifications\nOFF=Speech Synthesis", required: true, defaultValue: true, submitOnChange: true
             paragraph "Click Next (top right) to continue configuration...\n"
             //if (speechDeviceType == true) {state.speechDeviceType = "capability.musicPlayer"}
 			if (speechDeviceType == true) {state.speechDeviceType = "capability.audioNotification"}
