@@ -1,5 +1,5 @@
 definition(
-    name: "BigTalker2",
+    name: "BigTalker2-SonosMod",
     namespace: "rayzurbock",
     author: "rayzur@rayzurbock.com",
     description: "Let's talk about mode changes, switches, motions, and so on.",
