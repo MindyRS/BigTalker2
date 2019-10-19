@@ -20,8 +20,8 @@ preferences {
 }
 
 def pageStart(){
-    state.childAppName = "BigTalker2-Child"
-    state.parentAppName = "BigTalker2"
+    state.childAppName = "BigTalker2-SonosMod-Child"
+    state.parentAppName = "BigTalker2-SonosMod"
     state.namespace = "rayzurbock"
 	setAppVersion()
     state.supportedVoices = ["Ivy(en-us)","Joanna(en-us)","Joey(en-us)","Justin(en-us)","Kendra(en-us)","Kimberly(en-us)","Salli(en-us)","Amy(en-gb)","Brian(en-gb)","Emma(en-gb)","Miguel(es-us)","Penelope(es-us)"]
@@ -54,7 +54,8 @@ def pageStart(){
             }
         }
         section(){
-        	if ((settings?.debugmode == true) && (state.speechDeviceType == "capability.musicPlayer") && (settings?.resumePlay == true)) {
+        	//if ((settings?.debugmode == true) && (state.speechDeviceType == "capability.musicPlayer") && (settings?.resumePlay == true)) {
+		if ((settings?.debugmode == true) && (state.speechDeviceType == "capability.audioNotification") && (settings?.resumePlay == true)) {
             		input name: "debug_pollnow", type: "bool", title: "DEBUG: Poll Now (simply toggle)", multiple: false, required: false, submitOnChange: true, defaultValue: false
             		if (!(settings.debug_pollnow == mydebug_pollnow)) { poll() }
             }
@@ -82,8 +83,10 @@ def pageStatus(){
         //BEGIN STATUS DEFAULTS
         enabledDevices = "Speech Device Mode:\n"
         enabledDevices += "   "
-        if (state.speechDeviceType == "capability.musicPlayer") {
-            enabledDevices += "musicPlayer (Sonos, VLCThing, Generic DLNA)"
+        //if (state.speechDeviceType == "capability.musicPlayer") {
+        //    enabledDevices += "musicPlayer (Sonos, VLCThing, Generic DLNA)"
+	if (state.speechDeviceType == "capability.audioNotification") {
+            enabledDevices += "audioNotification (Sonos)"
         }
         if (state.speechDeviceType == "capability.speechSynthesis") {
             enabledDevices += "speechSynthesis (Ubi, LANnouncer)"
@@ -95,11 +98,13 @@ def pageStatus(){
             enabledDevices += "${it.displayName},"
         }
         enabledDevices += "\n\n"
-        if (settings.speechVolume && state.speechDeviceType == "capability.musicPlayer") {
+        //if (settings.speechVolume && state.speechDeviceType == "capability.musicPlayer") {
+	if (settings.speechVolume && state.speechDeviceType == "capability.audioNotification") {
             enabledDevices += "Adjust Volume To: ${settings.speechVolume}%"
             enabledDevices += "\n\n"
         }
-        if (state.speechDeviceType == "capability.musicPlayer") {
+        //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         	enabledDevices += "Default Resume Audio: ${settings?.resumePlay}"
             enabledDevices += "\n\n"
         }
@@ -149,7 +154,8 @@ def pageStatus(){
                     enabledDevices += "\n\n"
                 }
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	    if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.timeSlotResumePlay1 == null)) ? settings.timeSlotResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -190,7 +196,8 @@ def pageStatus(){
                     enabledDevices += "\n\n"
                 }
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	    if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.timeSlotResumePlay2 == null)) ? settings.timeSlotResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -231,7 +238,8 @@ def pageStatus(){
                     enabledDevices += "\n\n"
                 }
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.timeSlotResumePlay3 == null)) ? settings.timeSlotResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -273,7 +281,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.motionResumePlay1 == null)) ? settings.motionResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -322,7 +331,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.motionResumePlay2 == null)) ? settings.motionResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -371,7 +381,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.motionResumePlay3 == null)) ? settings.motionResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -421,7 +432,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.switchResumePlay1 == null)) ? settings.switchResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -470,7 +482,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.switchResumePlay2 == null)) ? settings.switchResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -519,7 +532,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.switchResumePlay3 == null)) ? settings.switchResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -569,7 +583,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.presResumePlay1 == null)) ? settings.presResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -618,7 +633,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.presResumePlay2 == null)) ? settings.presResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -667,7 +683,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.presResumePlay3 == null)) ? settings.presResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -717,7 +734,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.lockResumePlay1 == null)) ? settings.lockResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -766,7 +784,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.lockResumePlay2 == null)) ? settings.lockResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -815,7 +834,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.lockResumePlay3 == null)) ? settings.lockResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -865,7 +885,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.contactResumePlay1 == null)) ? settings.contactResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -913,7 +934,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.contactResumePlay2 == null)) ? settings.contactResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -962,7 +984,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.contactResumePlay3 == null)) ? settings.contactResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1017,7 +1040,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.modePhraseResumePlay1 == null)) ? settings.modePhraseResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1065,7 +1089,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.thermostatResumePlay1 == null)) ? settings.thermostatResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1115,7 +1140,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.accelerationResumePlay1 == null)) ? settings.accelerationResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1164,7 +1190,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.accelerationResumePlay2 == null)) ? settings.accelerationResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1213,7 +1240,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.accelerationResumePlay3 == null)) ? settings.accelerationResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1263,7 +1291,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.waterResumePlay1 == null)) ? settings.waterResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1312,7 +1341,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.waterResumePlay2 == null)) ? settings.waterResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1361,7 +1391,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.waterResumePlay3 == null)) ? settings.waterResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1414,7 +1445,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.smokeResumePlay1 == null)) ? settings.smokeResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1466,7 +1498,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.smokeResumePlay2 == null)) ? settings.smokeResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1518,7 +1551,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.smokeResumePlay3 == null)) ? settings.smokeResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1565,7 +1599,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.buttonResumePlay1 == null)) ? settings.buttonResumePlay1 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1611,7 +1646,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.buttonResumePlay2 == null)) ? settings.buttonResumePlay2 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1657,7 +1693,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.buttonResumePlay3 == null)) ? settings.buttonResumePlay3 : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1699,7 +1736,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.SHMResumePlayAway == null)) ? settings.SHMResumePlayAway : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1735,7 +1773,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.SHMResumePlayHome == null)) ? settings.SHMResumePlayHome : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1771,7 +1810,8 @@ def pageStatus(){
                 }
                 enabledDevices += "\n\n"
             }
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         		enabledDevices += "Resume Audio: ${(!(settings.SHMResumePlayDisarm == null)) ? settings.SHMResumePlayDisarm : settings.resumePlay}"
             	enabledDevices += "\n\n"
         	}
@@ -1806,7 +1846,8 @@ def pageTalkNow(){
         section(""){
         	def myTalkNowResume = false
             paragraph ("Speak the following phrase:\nNote: must differ from the last spoken phrase\n")
-            if (state.speechDeviceType == "capability.musicPlayer") {
+            //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
             	input name: "talkNowVolume", type: "number", title: "Set volume to (overrides default):", required: false, submitOnChange: true
             	input name: "talkNowResume", type: "bool", title: "Enable audio resume", multiple: true, required: false, submitOnChange: true, defaultValue: (settings?.resumePlay == false) ? false : true
                 input name: "talkNowVoice", type: "enum", title: "Select custom voice:", options: state.supportedVoices, required: false, submitOnChange: true
@@ -1817,7 +1858,8 @@ def pageTalkNow(){
             //LOGDEBUG("previoustext=${state.lastTalkNow} New=${settings.speechTalkNow}")
             if (((!(state.lastTalkNow == settings.speechTalkNow)) && (settings.talkNowSpeechDevice)) || (settings.speechTalkNow?.contains("%askalexa%"))){
                 //Say stuff!
-                if (state.speechDeviceType == "capability.musicPlayer") {
+                //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
                 	myTalkNowResume = (myTalkNowResume == "") ? settings.resumeAudio : true //use global setting if TalkNow is not set
                 	if (settings?.talkNowResume == null) {mytalkNowResume = true}  //default to true if not set.
                 }
@@ -1839,7 +1881,8 @@ def pageTalkNow(){
 
 def getMyVoice(deviceVoice){
     def myVoice = "Not Used"
-    if (state?.speechDeviceType == "capability.musicPlayer") {
+    //if (state?.speechDeviceType == "capability.musicPlayer") {
+	if (state?.speechDeviceType == "capability.audioNotification") {
     	log.debug "getMyVoice[parent]: deviceVoice=${deviceVoice ? deviceVoice : "Not selected"}"
         log.debug "getMyVoice[parent]: settings.speechVoice=${settings?.speechVoice}"
 		myVoice = (!(deviceVoice == null || deviceVoice == "")) ? deviceVoice : (settings?.speechVoice ? settings?.speechVoice : "Salli(en-us)")
@@ -1882,15 +1925,17 @@ def pageHelpPhraseTokens(){
 }
 
 def pageConfigureSpeechDeviceType(){
-    if (!(state.installed == true)) { state.installed = false; state.speechDeviceType = "capability.musicPlayer"}
+    //if (!(state.installed == true)) { state.installed = false; state.speechDeviceType = "capability.musicPlayer"}
+	if (!(state.installed == true)) { state.installed = false; state.speechDeviceType = "capability.audioNotification"}
     dynamicPage(name: "pageConfigureSpeechDeviceType", title: "Configure", nextPage: "pageConfigureDefaults", install: false, uninstall: false) {
         //section ("Speech Device Type Support"){
         section (){
-            paragraph "${app.label} can support either 'Music Player' or 'Speech Synthesis' devices."
-            paragraph "'Music Player' typically supports devices such as Sonos, VLCThing, Generic Media Renderer.\n\n'Speech Synthesis' typically supports devices such as Ubi and LANnouncer.\n\nIf only using with AskAlexa this setting can be ignored.\n\nThis setting cannot be changed without reinstalling ${app.label}."
+            paragraph "${app.label} can support either 'Audio Notification' or 'Speech Synthesis' devices."
+            paragraph "'Audio Notification' typically supports devices such as Sonos LAN Websocket.\n\n'Speech Synthesis' typically supports devices such as Ubi and LANnouncer.\n\nIf only using with AskAlexa this setting can be ignored.\n\nThis setting cannot be changed without reinstalling ${app.label}."
             input "speechDeviceType", "bool", title: "ON=Music Player\nOFF=Speech Synthesis", required: true, defaultValue: true, submitOnChange: true
             paragraph "Click Next (top right) to continue configuration...\n"
-            if (speechDeviceType == true) {state.speechDeviceType = "capability.musicPlayer"}
+            //if (speechDeviceType == true) {state.speechDeviceType = "capability.musicPlayer"}
+			if (speechDeviceType == true) {state.speechDeviceType = "capability.audioNotification"}
             if (speechDeviceType == false) {state.speechDeviceType = "capability.speechSynthesis"}
         }
     }
@@ -1918,9 +1963,11 @@ def pageConfigureDefaults(){
     //dynamicPage(name: "pageConfigureDefaults", title: "Configure Defaults", nextPage: "${myNextPage}", install: false, uninstall: false) {
         section("Talk with:"){
            if (state.speechDeviceType == null || state.speechDeviceType == "") { state.speechDeviceType = "capability.musicPlayer" }
+		   if (state.speechDeviceType == null || state.speechDeviceType == "") { state.speechDeviceType = "capability.audioNotification" }
            input "speechDeviceDefault", state.speechDeviceType, title: "Talk with these text-to-speech devices (default)", multiple: true, required: false, submitOnChange: false
         }
-        if (state.speechDeviceType == "capability.musicPlayer") {
+        //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
             section ("Adjust volume during announcement (optional; Supports: Sonos, VLC-Thing):"){
             	input "speechMinimumVolume", "number", title: "Minimum volume for announcement (0-100%, Default: 50%):", required: false
                 input "speechVolume", "number", title: "Set volume during announcement (0-100%):", required: false
@@ -1972,7 +2019,8 @@ def updated() {
 def checkConfig() {
     def configErrorList = ""
     if (!(state.speechDeviceType)){
-       state.speechDeviceType = "capability.musicPlayer" //Set a default if the app was update and didn't contain settings.speechDeviceType
+       //state.speechDeviceType = "capability.musicPlayer" //Set a default if the app was update and didn't contain settings.speechDeviceType
+	   state.speechDeviceType = "capability.audioNotification" //Set a default if the app was update and didn't contain settings.speechDeviceType
     }
     if ((settings?.allowScheduledPoll == true) && (settings?.resumePlay == true)) { state.allowScheduledPoll = true }
     if ((settings?.allowScheduledPoll == null) || (settings?.resumePlay == null)) { state.allowScheduledPoll = true }
@@ -2295,7 +2343,8 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
    	myVoice = myVoice.replace("(en-us)","")
    	myVoice = myVoice.replace("(en-gb)","")
    	myVoice = myVoice.replace("(es-us)","")
-    if (state.speechDeviceType == "capability.musicPlayer") { 
+    //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") { 
     	myDelay = TalkQueue(appname, phrase, customSpeechDevice, volume, resume, personality, voice, evt) 
         state.lastTalkTime = now()
     }
@@ -2314,7 +2363,8 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
     	sendNotification(processPhraseVariables(appname, "BigTalker - Check configuration. Phrase is empty for %devicename%", evt))
 	}
 	if (resume == null) { resume = true }
-	if ((state.speechDeviceType == "capability.musicPlayer") && (!( phrase==null ) && !(phrase==""))){
+	//if ((state.speechDeviceType == "capability.musicPlayer") && (!( phrase==null ) && !(phrase==""))){
+	if ((state.speechDeviceType == "capability.audioNotification") && (!( phrase==null ) && !(phrase==""))){
 		state.sound = ""
 		state.ableToTalk = false
 		if (!(settings.speechDeviceDefault == null) || !(customSpeechDevice == null)) {
@@ -2405,12 +2455,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
                             	LOGTRACE ("Sending playTrackandResume() 1")
 								LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it?.displayName} | cT<>null | cS/cT=playing | Sending playTrackAndResume() | CVol=${currentVolume} | SVol=${desiredVolume}")
 								if (desiredVolume > -1) { 
-									if (desiredVolume == currentVolume){it.playTrackAndResume(state.sound.uri, state.sound.duration, [delay: myDelay])}
-									if (!(desiredVolume == currentVolume)){it.playTrackAndResume(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+									if (desiredVolume == currentVolume){it.playTrackAndResume(state.sound.uri, [delay: myDelay])}
+									if (!(desiredVolume == currentVolume)){it.playTrackAndResume(state.sound.uri, desiredVolume, [delay: myDelay])}
 									spoke = true
 								} else { 
-									if (currentVolume >= minimumVolume) { it.playTrackAndResume(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-									if (currentVolume < minimumVolume) { it.playTrackAndResume(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+									if (currentVolume >= minimumVolume) { it.playTrackAndResume(state.sound.uri, [delay: myDelay]) }
+									if (currentVolume < minimumVolume) { it.playTrackAndResume(state.sound.uri, minimumVolume, [delay: myDelay]) }
 									spoke = true
 								} //if (desiredVolume)
 							} else {
@@ -2418,12 +2468,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
 								LOGTRACE ("Sending playTrackandRestore() 2 - ${it?.displayName} - cVol = ${currentVolume}")
                                	LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it?.displayName} | cT<>null | cS/cT=playing | NoResume! | Sending playTrackAndRestore() | CVol=${currentVolume} | SVol=${desiredVolume}")
 								if (desiredVolume > -1) { 
-									if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay])}
-									if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+									if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, [delay: myDelay])}
+									if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, desiredVolume, [delay: myDelay])}
 									spoke = true
 								} else { 
-									if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-									if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+									if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, [delay: myDelay]) }
+									if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, minimumVolume, [delay: myDelay]) }
 									spoke = true
 								} // if (desiredVolume)
 							} // if (resume)	
@@ -2434,12 +2484,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
 							LOGTRACE ("Sending playTrackandRestore() 3 - to ${it?.displayName} - cVol = ${currentVolume}")
                            	LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it?.displayName} | cT<>null | cS/cT<>playing | Sending playTrackAndRestore() | CVol=${currentVolume} | SVol=${desiredVolume}")
 							if (desiredVolume > -1) { 
-								if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay])}
-								if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+								if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, [delay: myDelay])}
+								if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, desiredVolume, [delay: myDelay])}
 								spoke = true
 							} else { 
-								if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-								if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+								if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, [delay: myDelay]) }
+								if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, minimumVolume, [delay: myDelay]) }
 								spoke = true
 							}// if (desiredVolume)
 						}// if ((currentStatus == 'playing' || currentTrack?.status == 'playing') && (!((currentTrack?.status == 'stopped') || (currentTrack?.status == 'paused'))))
@@ -2453,12 +2503,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
 									LOGTRACE ("Sending playTrackandResume() 4")
                    	                LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it?.displayName} | cT=null | cS=disconnected | Sending playTrackAndResume() | CVol=${currentVolume} | SVol=${desiredVolume}")
 									if (desiredVolume > -1) { 
-										if (desiredVolume == currentVolume){it.playTrackAndResume(state.sound.uri, state.sound.duration, [delay: myDelay])}
-										if (!(desiredVolume == currentVolume)){it.playTrackAndResume(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+										if (desiredVolume == currentVolume){it.playTrackAndResume(state.sound.uri, [delay: myDelay])}
+										if (!(desiredVolume == currentVolume)){it.playTrackAndResume(state.sound.uri, desiredVolume, [delay: myDelay])}
 										spoke = true
 									} else { 
-										if (currentVolume >= minimumVolume) { it.playTrackAndResume(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-										if (currentVolume < minimumVolume) { it.playTrackAndResume(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+										if (currentVolume >= minimumVolume) { it.playTrackAndResume(state.sound.uri, [delay: myDelay]) }
+										if (currentVolume < minimumVolume) { it.playTrackAndResume(state.sound.uri, minimumVolume, [delay: myDelay]) }
 										spoke = true
 									}
 								} else {
@@ -2466,12 +2516,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
                        	            LOGTRACE ("Sending playTrackandRestore() 5")
 									LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it?.displayName} | cT=null | cS=disconnected | No Resume! | Sending playTrackAndRestore() | CVol=${currentVolume} | SVol=${desiredVolume}")
 									if (desiredVolume > -1) { 
-										if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay])}
-										if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+										if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, [delay: myDelay])}
+										if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, desiredVolume, [delay: myDelay])}
 										spoke = true
 									} else { 
-										if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-										if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+										if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, [delay: myDelay]) }
+										if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, minimumVolume, [delay: myDelay]) }
 										spoke = true
 									}// if (desiredVolume)
 								}// if (resume)
@@ -2481,12 +2531,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
                                     	LOGTRACE ("Sending playTrackandResume() 6")
 										LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it?.displayName} | cT=null | cS=playing | Sending playTrackAndResume() | CVol=${currentVolume} | SVol=${desiredVolume}")
 										if (desiredVolume > -1) { 
-											if (desiredVolume == currentVolume){it.playTrackAndResume(state.sound.uri, state.sound.duration, [delay: myDelay])}
-											if (!(desiredVolume == currentVolume)){it.playTrackAndResume(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+											if (desiredVolume == currentVolume){it.playTrackAndResume(state.sound.uri, [delay: myDelay])}
+											if (!(desiredVolume == currentVolume)){it.playTrackAndResume(state.sound.uri, desiredVolume, [delay: myDelay])}
 											spoke = true
 										} else { 
-											if (currentVolume >= minimumVolume) { it.playTrackAndResume(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-											if (currentVolume < minimumVolume) { it.playTrackAndResume(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+											if (currentVolume >= minimumVolume) { it.playTrackAndResume(state.sound.uri, [delay: myDelay]) }
+											if (currentVolume < minimumVolume) { it.playTrackAndResume(state.sound.uri, minimumVolume, [delay: myDelay]) }
 											spoke = true
 										}// if (desiredVolume)
 									} else {
@@ -2494,12 +2544,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
 										LOGTRACE ("Sending playTrackandRestore() 7")
            	                            LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it?.displayName} | cT=null | cS=playing | No Resume! | Sending playTrackAndRestore() | CVol=${currentVolume} | SVol=${desiredVolume}")
 										if (desiredVolume > -1) { 
-											if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay])}
-											if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+											if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, [delay: myDelay])}
+											if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, desiredVolume, [delay: myDelay])}
 											spoke = true
 										} else { 
-											if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-											if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+											if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, [delay: myDelay]) }
+											if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, minimumVolume, [delay: myDelay]) }
 											spoke = true
 										}// if (desiredVolume)
 									}// if (resume)
@@ -2508,12 +2558,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
                                     LOGTRACE ("Sending playTrackandRestore() 8")
 									LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it?.displayName} | cT=null | cS<>playing | Sending playTrackAndRestore() | CVol=${currentVolume} | SVol=${desiredVolume}")
 									if (desiredVolume > -1) { 
-										if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay])}
-										if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+										if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, [delay: myDelay])}
+										if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, desiredVolume, [delay: myDelay])}
 										spoke = true
 									} else { 
-										if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-										if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+										if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, [delay: myDelay]) }
+										if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, minimumVolume, [delay: myDelay]) }
 										spoke = true
 									}// if (desiredVolume)
 								}// if (currentStatus == "playing")
@@ -2523,12 +2573,12 @@ def Talk(appname, phrase, customSpeechDevice, volume, resume, personality, voice
 							LOGTRACE ("Sending playTrackandRestore() 9")
        	                    LOGTRACE("TALK(${appname}.${evt.name})|mP| ${it.displayName} | (3) cT=null | cS=null | Sending playTrackAndRestore() | CVol=${currentVolume} | SVol=${desiredVolume}")
 							if (desiredVolume > -1) { 
-								if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay])}
-								if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, state.sound.duration, desiredVolume, [delay: myDelay])}
+								if (desiredVolume == currentVolume){it.playTrackAndRestore(state.sound.uri, [delay: myDelay])}
+								if (!(desiredVolume == currentVolume)){it.playTrackAndRestore(state.sound.uri, desiredVolume, [delay: myDelay])}
 								spoke = true
 							} else { 
-								if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, [delay: myDelay]) }
-								if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, state.sound.duration, minimumVolume, [delay: myDelay]) }
+								if (currentVolume >= minimumVolume) { it.playTrackAndRestore(state.sound.uri, [delay: myDelay]) }
+								if (currentVolume < minimumVolume) { it.playTrackAndRestore(state.sound.uri, minimumVolume, [delay: myDelay]) }
 								spoke = true
 							} //if (desiredVolume)
 						} //currentStatus == null
@@ -3395,7 +3445,8 @@ def poll(){
     		state.allowScheduledPoll = false
         	LOGDEBUG("Polling is not desired, disabling after this poll.")
     	}
-    	if (state.speechDeviceType == "capability.musicPlayer") {
+    	//if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") {
         	LOGDEBUG("Polling speech device(s) for latest status")
         	state.polledDevices = ""
         	try {
@@ -3514,7 +3565,8 @@ def getDesiredVolume(invol) {
             }
         }
 	}
-    if (state.speechDeviceType == "capability.musicPlayer") { 
+    //if (state.speechDeviceType == "capability.musicPlayer") {
+	if (state.speechDeviceType == "capability.audioNotification") { 
     	LOGDEBUG("finalVolume: ${finalVolume}")
     }
     return finalVolume
@@ -3553,5 +3605,5 @@ def LOGERROR(txt){
 }
 
 def setAppVersion(){
-    state.appversion = "P2.0.6"
+    state.appversion = "P2.0.7"
 }
