@@ -1846,15 +1846,15 @@ def pageTalkNow(){
         section(""){
         	def myTalkNowResume = false
             paragraph ("Speak the following phrase:\nNote: must differ from the last spoken phrase\n")
-            //if (state.speechDeviceType == "capability.musicPlayer") {
+           
 	if (state.speechDeviceType == "capability.audioNotification") {
             	input name: "talkNowVolume", type: "number", title: "Set volume to (overrides default):", required: false, submitOnChange: true
             	input name: "talkNowResume", type: "bool", title: "Enable audio resume", multiple: true, required: false, submitOnChange: true, defaultValue: (settings?.resumePlay == false) ? false : true
                 input name: "talkNowVoice", type: "enum", title: "Select custom voice:", options: state.supportedVoices, required: false, submitOnChange: true
-                myTalkNowResume = settings.talkNowResume
-            }
-            input name: "speechTalkNow", type: text, title: "Speak phrase", required: false, submitOnChange: true
-            input name: "talkNowSpeechDevice", type: state.speechDeviceType, title: "Talk with these text-to-speech devices", multiple: true, required: false, submitOnChange: true
+            	input name: "speechTalkNow", type: "text", title: "Speak phrase", required: false, submitOnChange: true
+            	input name: "talkNowSpeechDevice", type: state.speechDeviceType, title: "Talk with these text-to-speech devices", multiple: true, required: false, submitOnChange: true
+		myTalkNowResume = settings.talkNowResume
+	}
             //LOGDEBUG("previoustext=${state.lastTalkNow} New=${settings.speechTalkNow}")
             if (((!(state.lastTalkNow == settings.speechTalkNow)) && (settings.talkNowSpeechDevice)) || (settings.speechTalkNow?.contains("%askalexa%"))){
                 //Say stuff!
@@ -1962,8 +1962,8 @@ def pageConfigureDefaults(){
     return dynamicPage(state.dynPageProperties) {
     //dynamicPage(name: "pageConfigureDefaults", title: "Configure Defaults", nextPage: "${myNextPage}", install: false, uninstall: false) {
         section("Talk with:"){
-           if (state.speechDeviceType == null || state.speechDeviceType == "") { state.speechDeviceType = "capability.musicPlayer" }
-		   if (state.speechDeviceType == null || state.speechDeviceType == "") { state.speechDeviceType = "capability.audioNotification" }
+           //if (state.speechDeviceType == null || state.speechDeviceType == "") { state.speechDeviceType = "capability.musicPlayer" }
+	if (state.speechDeviceType == null || state.speechDeviceType == "") { state.speechDeviceType = "capability.audioNotification" }
            input "speechDeviceDefault", state.speechDeviceType, title: "Talk with these text-to-speech devices (default)", multiple: true, required: false, submitOnChange: false
         }
         //if (state.speechDeviceType == "capability.musicPlayer") {
