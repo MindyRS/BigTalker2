@@ -1,5 +1,9 @@
 # BigTalker2-SonosMod
 
+
+Updated the Text Now form to accept the text.
+
+-----
 Updated the original version to be utilized with the Sonos LAN Websocket DH. Until the author will update the orignal code.
 
 -----
